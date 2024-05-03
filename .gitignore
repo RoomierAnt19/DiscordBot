@@ -1,6 +1,6 @@
-**/images/*.jpg
-**/images/*.gif
+**/images/*
 **/SoundBoard/*.mp3
 **/SoundBoard/Intro.txt
 api_key.py
 opinion.gif
+AnnoyingUsers.txt
