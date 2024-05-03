@@ -20,16 +20,16 @@ class intro(Button):
                 if f'{interaction.user.id}' == sound:
                     spot = sb.tell()
                 sound = sb.readline()
-        if sound == None:
-            with open('SoundBoard/Intro.txt', 'r+') as sb:
-                sb.seek(spot)
-                sb.write("                                                                                                                  ")
-                sb.seek(spot)
-                sb.write(f'{self.label}\n')
-        else:
+        if spot == None:
             with open('SoundBoard/Intro.txt', 'a') as sb:
                 sb.write(f'{interaction.user.id}\n')
                 sb.write(f'{self.label}\n')
+        else:
+            with open('SoundBoard/Intro.txt', 'r+') as sb:
+                sb.seek(spot)
+                sb.write("                                                                                                                  \n")
+                sb.seek(spot)
+                sb.write(f'{self.label}')
 
 
 
