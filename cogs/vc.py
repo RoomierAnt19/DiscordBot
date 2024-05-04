@@ -4,6 +4,7 @@ from nextcord import Interaction
 from nextcord.ext import commands
 from nextcord.ui import Button, View
 import os
+from api_key import *
 
 
 class soundboard(Button):
@@ -28,8 +29,6 @@ class vc(commands.Cog):
 
     def __init__(self, client):
         self.client = client 
-
-    serverID = 1213299307046903839
 
     
     #joins the vc you are in
@@ -73,10 +72,7 @@ class vc(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update( self, member, before, after ):
         if member.id != 1213300232188592138:
-            # print(f'Member is in {member.voice.channel}')
-            # print("---------------------------")
-            # print(nextcord.VoiceClient.channel)
-            # print("---------------------------")
+            voice = nextcord.utils.get(self.client.voice_clients, guild = self.client.guilds[0], user = self.client.user)
             if before.channel is None and after.channel is not None:
                 sound = "Fun"
                 with open('SoundBoard/Intro.txt', 'r') as sb:
@@ -87,10 +83,25 @@ class vc(commands.Cog):
                             name = sb.readline()
                             sound = name.strip()
                         name = sb.readline()
-                channel = after.channel
-                voice = await channel.connect()
+                if voice == None:
+                    channel = after.channel
+                    voice = await channel.connect()
+                elif voice != after:
+                    voice = await voice.move_to( after.channel )
                 source = FFmpegPCMAudio(f'SoundBoard/{sound}.mp3')
                 player = voice.play(source)
+
+
+    @nextcord.slash_command(name = "val", description = "will move all users playing valorant to games voice", guild_ids= [serverID])
+    async def val( self, interaction: Interaction):
+        guild = self.client.guilds[0]
+        channel = await self.client.fetch_channel(GAME_CHANNEL)
+        for member in guild.members:
+            if not member.bot:
+                act = nextcord.utils.get(member.activities, name = "VALORANT")
+                if( member.voice and act != None):
+                    await member.move_to(channel)
+        await interaction.response.send_message("Done", ephemeral = True)
                 
 
     

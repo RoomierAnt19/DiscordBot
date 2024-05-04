@@ -7,7 +7,7 @@ from api_key import *
 
 intents = nextcord.Intents.default()
 intents.typing = False
-intents.presences = False
+intents.presences = True
 intents.message_content = True
 intents.members = True
 buttonIndex = 0

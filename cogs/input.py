@@ -5,6 +5,7 @@ from nextcord import Message
 from nextcord.ui import View, Button
 import io
 import os
+from api_key import *
 
 #Need to Fix this
 class intro(Button):
@@ -38,7 +39,6 @@ class input(commands.Cog):
     def __init__(self, client):
         self.client = client 
 
-    serverID = 1213299307046903839
 
 
     @nextcord.slash_command(name = "include", description = "adds a sound to soundboard", guild_ids=[serverID])

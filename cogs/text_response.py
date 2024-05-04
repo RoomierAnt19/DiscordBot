@@ -10,8 +10,6 @@ class text_responce(commands.Cog):
     def __init__(self, client):
         self.client = client 
 
-    serverID = 1213299307046903839
-
 
     #Random Responces
     @commands.Cog.listener()
