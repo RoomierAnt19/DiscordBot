@@ -48,7 +48,6 @@ class input(commands.Cog):
 
     @nextcord.slash_command(name = "remove", description = "removes a sound to soundboard", guild_ids=[serverID])
     async def add(self, interaction: Interaction, name: str):
-        file = []
         await interaction.send(f"{name} has now been removed from soundboard")
         os.remove(f'SoundBoard/{name}.mp3')
 

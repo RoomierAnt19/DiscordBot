@@ -33,7 +33,7 @@ class text_responce(commands.Cog):
     
     @nextcord.slash_command(name = "opinion", description = "Your opinion", guild_ids = [serverID])
     async def opinion( self, interaction: Interaction):
-        await interaction.send(file=nextcord.File('opinion.gif'))
+        await interaction.send(file=nextcord.File('images/Reaction/Adam.gif'))
 
     @commands.Cog.listener()
     async def on_raw_reaction_add( self, payload ):
@@ -44,6 +44,13 @@ class text_responce(commands.Cog):
         message = await channel.fetch_message(message_id)
         image = glob.glob(random.choice(glob.glob('images/Reaction/*')))
         await message.reply("",file = nextcord.File(f'images/Reaction/{image[0][16:]}') )
+
+
+    @commands.Cog.listener()
+    async def on_member_update(self, before, after):
+        if before.nick != after.nick:
+            image = glob.glob(random.choice(glob.glob('images/Reaction/*')))
+            await self.client.get_channel(CHANNEL).send(f"{before.nick}'s nickname has been changed to {after.nick}!",file = nextcord.File(f'images/Reaction/{image[0][16:]}'))
         
 
     #When the annoying user that keeps randomly rejoining rejoins
