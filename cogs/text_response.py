@@ -1,7 +1,8 @@
-import nextcord
+import nextcord, glob, random
 from nextcord import Interaction
 from nextcord.ext import commands
 from api_key import *
+
 
 
 
@@ -33,6 +34,17 @@ class text_responce(commands.Cog):
     @nextcord.slash_command(name = "opinion", description = "Your opinion", guild_ids = [serverID])
     async def opinion( self, interaction: Interaction):
         await interaction.send(file=nextcord.File('opinion.gif'))
+
+    @commands.Cog.listener()
+    async def on_raw_reaction_add( self, payload ):
+        message_id = payload.message_id
+        channel_id = payload.channel_id
+        guild = self.client.get_guild(payload.guild_id)
+        channel = guild.get_channel(channel_id)
+        message = await channel.fetch_message(message_id)
+        image = glob.glob(random.choice(glob.glob('images/Reaction/*')))
+        await message.reply("",file = nextcord.File(f'images/Reaction/{image[0][16:]}') )
+        
 
     #When the annoying user that keeps randomly rejoining rejoins
     @commands.Cog.listener()

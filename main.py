@@ -6,13 +6,13 @@ from api_key import *
 
 
 intents = nextcord.Intents.default()
-intents.typing = False
+intents.typing = True
 intents.presences = True
 intents.message_content = True
 intents.members = True
+intents.reactions = True
 buttonIndex = 0
 
-#TOKEN = 'MTIxMzMwMDIzMjE4ODU5MjEzOA.G_Ub8O.9PYDWpWh3jl9kgdsaIDXiCBJOKj80XvWm6Fci0'
 
 client = commands.Bot(command_prefix = '!', intents = intents)
 
