@@ -15,7 +15,7 @@ class text_responce(commands.Cog):
     #Random Responces
     @commands.Cog.listener()
     async def on_message(self, message):
-        if (message.author != Interaction.user):
+        if (message.author != Interaction.user and message.author.bot is False):
             if ("reddit" in message.content.lower()):
                 await message.reply("", file = nextcord.File('images/Reaction/Adam4.gif'))
             elif (f'<@1213300232188592138>' in message.content.lower()):
